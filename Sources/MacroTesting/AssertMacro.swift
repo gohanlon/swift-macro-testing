@@ -634,7 +634,8 @@ private class FixItApplier: SyntaxRewriter {
       for fixIts in diagnostic.fixIts {
         for change in fixIts.changes {
           switch change {
-          case .replace(let oldNode, let newNode):
+          case .replace(let oldNode, let newNode)
+          where node.kind == oldNode.kind:
             let offset =
               context
               .location(for: oldNode.position, anchoredAt: oldNode, fileName: "")
